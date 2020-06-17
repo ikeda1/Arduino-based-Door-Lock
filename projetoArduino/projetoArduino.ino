@@ -182,19 +182,6 @@ void read_data() {
     char rxx = bluetooth.read();
     receivedData.concat(rxx);   // Cria a mensagem lida pelo arduino, concatenando os dados recebidos
     delay(10);
-    if (receivedData == "4" && mode == "2") {    //Destrava o sistema, o sistema volta a funcionar normalmente
-      bluetooth.println("UNLOCKED");
-      lcd.clear();
-      lcd.print("     System     ");
-      lcd.setCursor(0, 1);
-      lcd.print("    Unlocked    ");
-      opening_sound();
-      mode = "0";
-    }
-    if (receivedData == "3" && mode == "0") {   //Trava o sistema, impedindo qualquer ação de abrir a porta
-      bluetooth.println("LOCKED");
-      mode = "2";
-    }
     if (receivedData == "1" && mode != "2") {     //Se receber 1, abre a porta
       bluetooth.println("OPENED");
       sg90.write(120); // Porta Aberta
@@ -204,11 +191,23 @@ void read_data() {
       delay(300);
       lcd.clear();
       mode = "1";
-
     }
     if (receivedData == "2" && mode == "1") {     //Se receber 2, fecha a porta
       bluetooth.println("CLOSED");
       sg90.write(0); // Porta Fechada
+      mode = "0";
+    }
+    if (receivedData == "3" && mode == "0") {   //Trava o sistema, impedindo qualquer ação de abrir a porta
+      bluetooth.println("LOCKED");
+      mode = "2";
+    }
+    if (receivedData == "4" && mode == "2") {    //Destrava o sistema, o sistema volta a funcionar normalmente
+      bluetooth.println("UNLOCKED");
+      lcd.clear();
+      lcd.print("     System     ");
+      lcd.setCursor(0, 1);
+      lcd.print("    Unlocked    ");
+      opening_sound();
       mode = "0";
     }
     receivedData = "";
