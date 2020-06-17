@@ -1,7 +1,12 @@
 # Arduino-based-Door-Lock
 Arduino project made for university.
 
+<img src="projetoArduino/imagem_projeto_concluido.png">
+
 It was based on this project (https://electronicshobbyists.com/rfid-and-keypad-based-door-lock-and-alert-system-using-arduino/) but using a HC-05 bluetooth module instead of the GSM SIM900 module.
+
+# Circuit Diagram
+<img src="projetoArduino/circuit_diagram.jpg">
 
 # Libraries
 The libraries used on the code are in the links below:
